@@ -112,7 +112,7 @@ public:
     bool Scale(int width, int height);
 
     TgaColor GetTgaColor(int x, int y);
-    bool SetTgaColor(int x, int y, const TgaColor& c);
+    bool SetTgaColor(int x, int y, const TgaColor& color);
 
     TgaImage& operator=(const TgaImage& other);
     ~TgaImage();
