@@ -37,9 +37,9 @@ struct TgaColor
         unsigned int  Value;
     };
 
-    int BytesPP;
+    int BytesPerPixel;
 
-    TgaColor() : Value(0), BytesPP(1)
+    TgaColor() : Value(0), BytesPerPixel(1)
     { }
 
     TgaColor
@@ -52,18 +52,18 @@ struct TgaColor
         : B(b), G(g), R(r), A(a)
     { }
     
-    TgaColor(int value, int bytesPP)
-        : Value(value), BytesPP(bytesPP) 
+    TgaColor(int value, int bytesPerPixel)
+        : Value(value), BytesPerPixel(bytesPerPixel) 
     { }
 
     TgaColor(const TgaColor& other)
-        : Value(other.Value), BytesPP(other.BytesPP)
+        : Value(other.Value), BytesPerPixel(other.BytesPerPixel)
     { }
 
-    TgaColor(const unsigned char* raw, int bytesPP)
-        : Value(0), BytesPP(bytesPP)
+    TgaColor(const unsigned char* raw, int bytesPerPixel)
+        : Value(0), BytesPerPixel(bytesPerPixel)
     {
-        for (int i = 0; i < bytesPP; ++i)
+        for (int i = 0; i < bytesPerPixel; ++i)
         {
             Raw[i] = raw[i];
         }
@@ -73,7 +73,7 @@ struct TgaColor
     {
         if (this != &other)
         {
-            BytesPP = other.BytesPP;
+            BytesPerPixel = other.BytesPerPixel;
             Value = other.Value;
         }
         return *this;
@@ -86,7 +86,7 @@ protected:
     unsigned char* data;
     int width;
     int height;
-    int bytesPP;
+    int bytesPerPixel;
 
     bool LoadRleData(std::ifstream& in);
     bool UnloadRleData(std::ofstream& out);
@@ -100,7 +100,7 @@ public:
     };
 
     TgaImage();
-    TgaImage(int width, int height, int bytesPP);
+    TgaImage(int width, int height, int bytesPerPixel);
     TgaImage(const TgaImage& other);
 
     bool ReadTgaFile(const char* filename);
@@ -112,16 +112,16 @@ public:
     bool Scale(int width, int height);
 
     TgaColor GetTgaColor(int x, int y);
-    bool SetTgaColor(int x, int y, TgaColor& c);
+    bool SetTgaColor(int x, int y, const TgaColor& c);
 
     TgaImage& operator=(const TgaImage& other);
     ~TgaImage();
 
     int GetWidth();
     int GetHeight();
-    int GetBytesPP();
+    int GetBytesPerPixel();
 
     unsigned char* GetBuffer();
-    void Clear();
+    void ClearBuffer();
 };
 
