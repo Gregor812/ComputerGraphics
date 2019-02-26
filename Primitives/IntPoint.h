@@ -1,10 +1,17 @@
 #pragma once
 
-struct IntPoint
+namespace ComputerGraphics
 {
-    int x;
-    int y;
+    namespace Primitives
+    {
+        struct IntPoint
+        {
+            int x;
+            int y;
 
-    IntPoint(int x, int y) : x(x), y(y)
-    { }
-};
+            IntPoint(int x, int y) : x(x), y(y)
+            {
+            }
+        };
+    } // namespace Primitives
+} // namespace ComputerGraphics
