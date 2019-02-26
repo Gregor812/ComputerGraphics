@@ -8,6 +8,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb -g3 -pg -O0")
 
 include_directories(
     ${CMAKE_SOURCE_DIR}/TgaImage
+    ${CMAKE_SOURCE_DIR}/Primitives
 )
 
 add_library(
