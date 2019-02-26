@@ -13,13 +13,19 @@ namespace ComputerGraphics
         {
             std::ifstream in;
             in.open (filename, std::ifstream::in);
-            if (in.fail()) return;
+            if (in.fail())
+            {
+                std::cerr << "cannot open file: " << filename << std::endl;
+                return;
+            }
+
             std::string line;
             while (!in.eof())
             {
                 std::getline(in, line);
                 std::istringstream iss(line.c_str());
                 char trash;
+
                 if (!line.compare(0, 2, "v "))
                 {
                     iss >> trash;
@@ -32,6 +38,7 @@ namespace ComputerGraphics
                     std::vector<int> f;
                     int itrash, idx;
                     iss >> trash;
+
                     while (iss >> idx >> trash >> itrash >> trash >> itrash)
                     {
                         idx--; // in wavefront obj all indices start at 1, not zero
@@ -40,7 +47,7 @@ namespace ComputerGraphics
                     faces_.push_back(f);
                 }
             }
-            std::cerr << "# v# " << verts_.size() << " f# "  << faces_.size() << std::endl;
+            std::cout << "# v# " << verts_.size() << " f# "  << faces_.size() << std::endl;
         }
 
         Model::~Model()

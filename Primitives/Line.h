@@ -2,6 +2,8 @@
 
 #include <cmath>
 #include <iostream>
+
+#include "Geometry.h"
 #include "IntPoint.h"
 #include "TgaImage.h"
 
@@ -19,8 +21,7 @@ namespace ComputerGraphics
         public:
             Line(const IntPoint& start, const IntPoint& end, const FileFormats::TgaColor& color)
                 : _start(start), _end(end), _color(color)
-            {
-            }
+            { }
 
             Line(const Line& other) = default;
             Line& operator=(const Line& other) = default;
@@ -28,6 +29,18 @@ namespace ComputerGraphics
             void Draw(FileFormats::TgaImage& image)
             {
                 Draw(_start, _end, image, _color);
+            }
+
+            static void Draw(
+                const Vec2i& v0,
+                const Vec2i& v1,
+                FileFormats::TgaImage& image, 
+                const FileFormats::TgaColor& color
+            )
+            {
+                IntPoint start = IntPoint(v0.x, v0.y);
+                IntPoint end = IntPoint(v1.x, v1.y);
+                Draw(start, end, image, color);
             }
 
             static void Draw(
